@@ -1,13 +1,14 @@
-package jpabook.jpashop.repository;
+package jpabook.jpashop.repository.order;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.simplerepository.OrderSimpleQueryDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -90,4 +91,23 @@ public class OrderRepository {
         TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000 건
         return query.getResultList();
     }
+
+    public List<Order> findAllWithMemberDelivery() {
+        return em.createQuery( // 패치 조인: 쿼리단에서 join을 사용하면 Lazy 로딩설정을 무시하고 쿼리대로 데이터를 긁어온다. 실무에서 적극 활용!
+                     "select o from Order o" +
+                        " join fetch o.member m" +
+                        " join fetch o.delivery d", Order.class
+        ).getResultList();
+    }
+
+//    public List<OrderSimpleQueryDto> findOrderDtos() {
+//        return em.createQuery(
+//                "select new jpabook.jpashop.repository.OrderSimpleQueryDto(" +
+//                        "o.id, m.name, o.orderDate, o.status, m.address" +
+//                        ")" +
+//                        " from Order o" +
+//                        " join o.member m" +
+//                        " join o.delivery d", OrderSimpleQueryDto.class
+//        ).getResultList();
+//    }
 }

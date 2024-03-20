@@ -12,6 +12,8 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+        default_batch_fetch_size: 100 # 패치 조인시 미리 in 쿼리를 날릴 갯수 지정 - 여기를 잘 활용하는게 좋음
+#    open-in-view: false # 영속성 컨텐스트를 트랜잭션 내에서만 유지 = false, 요청종료시까지 유지 = true(default)
 
 logging:
   level:

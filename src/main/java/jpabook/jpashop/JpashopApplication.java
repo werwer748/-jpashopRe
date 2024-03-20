@@ -12,11 +12,11 @@ public class JpashopApplication {
 		SpringApplication.run(JpashopApplication.class, args);
 	}
 
-	@Bean
-	Hibernate5JakartaModule hibernate5JakartaModule() {
-//		return new Hibernate5JakartaModule();
-		Hibernate5JakartaModule hibernate5JakartaModule = new Hibernate5JakartaModule();
-//!				.configure(Hibernate5JakartaModule.Feature.FORCE_LAZY_LOADING, true); // LAZY로딩 걸려있는것들 강제로 다 가져옴
-		return hibernate5JakartaModule;
-	}
+//	@Bean
+//	Hibernate5JakartaModule hibernate5JakartaModule() {
+////		return new Hibernate5JakartaModule();
+//		Hibernate5JakartaModule hibernate5JakartaModule = new Hibernate5JakartaModule();
+////!				.configure(Hibernate5JakartaModule.Feature.FORCE_LAZY_LOADING, true); // LAZY로딩 걸려있는것들 강제로 다 가져옴
+//		return hibernate5JakartaModule;
+//	}
 }
